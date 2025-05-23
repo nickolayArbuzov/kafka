@@ -1,5 +1,4 @@
 from pydantic_settings import BaseSettings
-from pathlib import Path
 
 
 class Postgresql(BaseSettings):
@@ -17,7 +16,6 @@ class Postgresql(BaseSettings):
         )
 
     class Config:
-        env_file = Path(__file__).resolve().parent.parent / ".env"
         extra = "ignore"
 
 
@@ -28,7 +26,6 @@ class Kafka(BaseSettings):
     KAFKA_BOOTSTRAP_SERVERS: str
 
     class Config:
-        env_file = Path(__file__).resolve().parent.parent / ".env"
         extra = "ignore"
 
 
@@ -39,7 +36,6 @@ class Redis(BaseSettings):
     REDIS_URL: str
 
     class Config:
-        env_file = Path(__file__).resolve().parent.parent / ".env"
         extra = "ignore"
 
 

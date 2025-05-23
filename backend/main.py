@@ -1,13 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from src.database import Base, engine
 from src.features.movement import movement_controller
 from src.features.warehouse import warehouse_controller
 
 
 async def lifespan(app):
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
     yield
 
 
