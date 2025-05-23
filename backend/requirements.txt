@@ -1,0 +1,16 @@
+aiokafka
+alembic
+asyncpg
+fastapi
+httpx
+prometheus-fastapi-instrumentator
+psycopg2-binary
+pydantic-settings
+pytest
+pytest-asyncio
+redis
+sqlalchemy
+uvicorn
+
+
+
