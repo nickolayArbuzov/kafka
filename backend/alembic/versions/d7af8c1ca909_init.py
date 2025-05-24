@@ -30,8 +30,6 @@ def upgrade() -> None:
         sa.Column("created_at", sa.DateTime(), nullable=True),
         sa.Column("updated_at", sa.DateTime(), nullable=True),
     )
-    op.create_index("ix_inventory_warehouse_id", "inventory", ["warehouse_id"])
-    op.create_index("ix_inventory_product_id", "inventory", ["product_id"])
 
     op.create_table(
         "movement",
@@ -49,17 +47,13 @@ def upgrade() -> None:
         sa.Column("created_at", sa.DateTime(), nullable=True),
         sa.Column("updated_at", sa.DateTime(), nullable=True),
     )
-    op.create_index("ix_movement_movement_id", "movement", ["movement_id"])
     op.create_index("ix_movement_product_id", "movement", ["product_id"])
     op.create_index("ix_movement_warehouse_id", "movement", ["warehouse_id"])
 
 
 def downgrade() -> None:
-    op.drop_index("ix_inventory_warehouse_id", table_name="inventory")
-    op.drop_index("ix_inventory_product_id", table_name="inventory")
     op.drop_table("inventory")
 
-    op.drop_index("ix_movement_movement_id", table_name="movement")
     op.drop_index("ix_movement_product_id", table_name="movement")
     op.drop_index("ix_movement_warehouse_id", table_name="movement")
     op.drop_table("movement")

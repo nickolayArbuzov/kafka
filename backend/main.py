@@ -5,6 +5,7 @@ from src.broker.consumer import start_consumer
 from src.broker.producer import start_producer
 from src.features.inventory import inventory_controller
 from src.features.movement import movement_controller
+from src.features.load_testing import load_testing_controller
 
 
 async def lifespan(app):
@@ -23,3 +24,4 @@ app.add_middleware(
 )
 app.include_router(inventory_controller.router, prefix="/api", tags=["inventory"])
 app.include_router(movement_controller.router, prefix="/api", tags=["movement"])
+app.include_router(load_testing_controller.router, prefix="/api", tags=["load_testing"])

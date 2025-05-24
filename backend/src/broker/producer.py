@@ -11,6 +11,7 @@ async def start_producer():
         bootstrap_servers=kafka_connection.KAFKA_BOOTSTRAP_SERVERS,
         value_serializer=lambda v: json.dumps(v).encode("utf-8"),
     )
+    print("producer", kafka_connection.KAFKA_BOOTSTRAP_SERVERS)
     await producer.start()
 
 
