@@ -1,4 +1,5 @@
-from sqlalchemy import UUID, DateTime, ForeignKey, Integer, Column
+from uuid import uuid4
+from sqlalchemy import UUID, DateTime, Enum, Integer, Column
 
 from src.database import Base
 from src.common.mixins.timestamp_mixin import TimestampMixin
@@ -7,11 +8,11 @@ from src.common.mixins.timestamp_mixin import TimestampMixin
 class Movement(TimestampMixin, Base):
     __tablename__ = "movement"
 
-    id = Column(UUID(as_uuid=True), primary_key=True)
-    product_id = Column(UUID(as_uuid=True), ForeignKey("product.id"))
-    from_warehouse_id = Column(UUID(as_uuid=True), ForeignKey("warehouse.id"))
-    to_warehouse_id = Column(UUID(as_uuid=True), ForeignKey("warehouse.id"))
-    departure_time = Column(DateTime)
-    arrival_time = Column(DateTime)
-    departure_quantity = Column(Integer)
-    arrival_quantity = Column(Integer)
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
+    movement_id = Column(UUID(as_uuid=True), index=True, nullable=False)
+    warehouse_id = Column(UUID(as_uuid=True), nullable=False)
+    product_id = Column(UUID(as_uuid=True), nullable=False)
+
+    timestamp = Column(DateTime(timezone=True), nullable=False)
+    event = Column(Enum("arrival", "departure", name="movement_type"), nullable=False)
+    quantity = Column(Integer, nullable=False)

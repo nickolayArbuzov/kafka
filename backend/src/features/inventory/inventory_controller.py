@@ -16,11 +16,12 @@ def get_query_repo(db: AsyncSession = Depends(get_db)) -> MovementQueryRepositor
     return MovementQueryRepository(db)
 
 
-@router.get("/movements/{movement_id}")
+@router.get("/warehouses/{warehouse_id}/products/{product_id}")
 async def GetMovementById(
-    movement_id: str,
+    warehouse_id: str,
+    product_id: str,
     repo: MovementQueryRepository = Depends(get_query_repo),
 ):
-    query = GetMovementByIdQuery(movement_id=movement_id)
+    query = GetMovementByIdQuery(warehouse_id=warehouse_id, product_id=product_id)
     use_case = GetMovementByIdUseCase(repo)
     return await use_case.execute(query)

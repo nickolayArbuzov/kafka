@@ -24,6 +24,7 @@ postgresql_connection = Postgresql()
 
 class Kafka(BaseSettings):
     KAFKA_BOOTSTRAP_SERVERS: str
+    TOPIC: str = "warehouse.events"
 
     class Config:
         extra = "ignore"
